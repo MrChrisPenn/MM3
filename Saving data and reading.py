@@ -1,6 +1,31 @@
 import csv
+import microbit
+from mcpi import minecraft as minecraft
+from mcpi import block as block
+from datetime import datetime
+import time
+import serial
+import random
+
+
+WoolList =[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+
+EngX = 1.0
+EngZ = 50.0
+
+UsaX = 53.8
+UsaZ = 39.7
+ 
+mc = minecraft.Minecraft.create()
 
 Quiz_Questions = []
+
+
+def Teleport(x,z,Country):
+    mc.player.setPos(x,20,z)
+    mc.camera.setFollow()
+    mc.setBlock(x,1, z,35,random.choice(WoolList))
+    mc.postToChat(Country)
 
 def Load_Questions():
     print("Loading Questions....")
@@ -10,8 +35,6 @@ def Load_Questions():
     csv_reader = csv.reader(csv_file, delimiter=',')
 
     #load data into class list / append
-
-
 
     for row in csv_reader:
         Question_Data = []
@@ -47,5 +70,15 @@ while Question_Number < len(Quiz_Questions):
     else:
         print("Incorrect")
     Question_Number = Question_Number + 1
+ 
+    time.sleep(1)
+    if microbit.p
+        print("Pin 1 touched, teleport to England")
+        Teleport(EngX,EngZ,"England")
+    elif microbit.pin2.is_touched():
+        print("Pin 2 touched, teleport to the USA") 
+        Teleport(UsaX,UsaZ,"USA")
+
+
 
 
